@@ -1,0 +1,47 @@
+name: Update weaner prices
+on:
+  schedule:
+    - cron: "0 4 * * *"    # 06:00 SAST (UTC+2)
+    - cron: "0 10 * * *"   # 12:00 SAST
+    - cron: "0 16 * * *"   # 18:00 SAST
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: update-prices
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pdftotext (poppler-utils)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Parser tests (saved pages)
+        run: python3 -m unittest discover -s tests -v
+      - name: Fetch RPO + AMT prices
+        run: python3 scrape.py prices.json
+      - name: Validate feed
+        run: |
+          python3 - <<'PY'
+          import json
+          d = json.load(open("prices.json"))
+          assert d["schema"] == 1 and d["sources"], "empty feed"
+          live = [s for s in d["sources"] if s.get("latest")]
+          assert live, "no source has any data"
+          for s in d["sources"]:
+              print(s["id"], s.get("status"), (s.get("latest") or {}).get("value"), s.get("error") or "")
+          PY
+      - name: Commit prices.json if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add prices.json
+          git diff --cached --quiet && { echo "No changes"; exit 0; }
+          git commit -m "Update weaner prices $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase --autostash || true
+          git push

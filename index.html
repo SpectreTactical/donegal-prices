@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Donegal Farm – weaner price feed</title>
+<style>
+body{margin:0;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1d2420;background:#f6f7f4}
+main{max-width:760px;margin:0 auto;padding:14px}
+h1{font-size:20px;margin:6px 0}h2{font-size:16px;margin:18px 0 6px}
+.card{background:#fff;border:1px solid #d5dbd3;border-radius:10px;padding:12px;margin:10px 0}
+.big{font-size:26px;font-weight:700}.mut{color:#5f6b63;font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:5px 8px;border-bottom:1px solid #e8ebe6;text-align:left}td.n{text-align:right}
+a{color:#2f5d3a}.err{color:#8a5a00}
+</style>
+</head>
+<body>
+<main>
+<h1>🐄 Donegal Farm – weaner calf price feed</h1>
+<p class="mut">Weekly weaner calf benchmark prices used by the Donegal Farm Herd Tracker. Updated automatically three times a day (06:00, 12:00, 18:00 SAST); the sources themselves publish once a week. Machine-readable feed: <a href="prices.json">prices.json</a>.</p>
+<div id="out" class="card">Loading…</div>
+<h2>Sources and credits</h2>
+<div class="card">
+<p><b>RPO – Red Meat Producers’ Organisation</b> – weekly weaner calf price (bulls, national, R/kg live) from the carcass price table at <a href="https://rpo.co.za/carcass-prices/" rel="noopener">rpo.co.za/carcass-prices</a>.</p>
+<p><b>AMT</b> – weaners 200-250 kg (R/kg live) from <a href="https://amtrends.co.za/market-pricesv2/" rel="noopener">amtrends.co.za market prices</a>, with weaner classes and regional prices from the <a href="https://amtrends.co.za/livestock-weekly-reports-amtrends/" rel="noopener">AMT Weekly Livestock Report</a>.</p>
+<p><b>RMIS – Red Meat Industry Services</b> – official price dashboard: <a href="https://rmis.co.za/prices/" rel="noopener">rmis.co.za/prices</a>. Link only; RMIS figures are not collected.</p>
+<p class="mut">All figures belong to their publishers and are reproduced here for private family use with attribution. They are weekly national/regional auction averages and are not a valuation of any animal. Please refer to the publishers’ own sites for the authoritative figures. No farm data is stored in this feed.</p>
+</div>
+</main>
+<script>
+fetch('prices.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function r(v) { return v == null ? '–' : 'R ' + Number(v).toFixed(2).replace('.', ','); }
+  var h = '<p class="mut">Feed checked ' + esc(new Date(d.generated_at).toLocaleString('en-ZA')) + '</p>';
+  d.sources.forEach(function (s) {
+    if (s.link_only) return;
+    var l = s.latest || {};
+    h += '<h2>' + esc(s.name) + '</h2><div class="big">' + r(l.value) + '/kg</div><div class="mut">' + esc(s.series) + '<br>' +
+      (l.week_ending ? 'Week ended ' + esc(l.week_ending) + ' · published ' : 'Dated ') + esc(l.date || '–') + (l.previous != null ? ' · previous ' + r(l.previous) : '') + '</div>' +
+      (s.status !== 'ok' && s.error ? '<p class="err">⚠ ' + esc(s.status) + ': ' + esc(s.error) + '</p>' : '');
+    if (s.regions && s.regions.length) h += '<table>' + (s.classes || []).concat(s.regions).map(function (c) { return '<tr><td>' + esc(c.label) + '</td><td class="n">' + r(c.value) + '</td></tr>'; }).join('') + '</table>' +
+      (s.report ? '<p class="mut">From AMT Weekly Livestock Report No ' + esc(s.report.no) + ' (' + esc(s.report.date) + ')</p>' : '');
+  });
+  document.getElementById('out').innerHTML = h;
+}).catch(function () { document.getElementById('out').textContent = 'Could not load prices.json.'; });
+</script>
+</body>
+</html>

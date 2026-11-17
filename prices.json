@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "feed": "donegal-prices",
- "generated_at": "2026-11-17T13:00:23Z",
+ "generated_at": "2026-11-17T18:52:09Z",
  "note": "Weekly weaner calf benchmark prices for the Donegal Farm Herd Tracker. Figures are reproduced for private family use with attribution to their publishers (RPO and AMT). National/regional auction averages – not a valuation of any animal.",
  "sources": [
   {
@@ -12,8 +12,8 @@
    "attribution": "Source: Red Meat Producers’ Organisation (RPO), rpo.co.za – weekly Absa carcass / weaner price table. Reproduced for private family use with attribution.",
    "status": "ok",
    "error": null,
-   "checked_at": "2026-11-17T13:00:23Z",
-   "last_success": "2026-11-17T13:00:23Z",
+   "checked_at": "2026-11-17T18:52:09Z",
+   "last_success": "2026-11-17T18:52:09Z",
    "latest": {
     "date": "2026-11-13",
     "week_ending": "2026-11-06",
@@ -1167,8 +1167,8 @@
    "attribution": "Source: AMT – amtrends.co.za market prices and AMT Weekly Livestock Report. Reproduced for private family use with attribution.",
    "status": "ok",
    "error": null,
-   "checked_at": "2026-11-17T13:00:23Z",
-   "last_success": "2026-11-17T13:00:23Z",
+   "checked_at": "2026-11-17T18:52:09Z",
+   "last_success": "2026-11-17T18:52:09Z",
    "latest": {
     "date": "2026-11-13",
     "week_ending": null,

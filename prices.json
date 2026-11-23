@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "feed": "donegal-prices",
- "generated_at": "2026-11-23T14:19:26Z",
+ "generated_at": "2026-11-23T21:48:20Z",
  "note": "Weekly weaner calf benchmark prices for the Donegal Farm Herd Tracker. Figures are reproduced for private family use with attribution to their publishers (RPO and AMT). National/regional auction averages – not a valuation of any animal.",
  "sources": [
   {
@@ -12,8 +12,8 @@
    "attribution": "Source: Red Meat Producers’ Organisation (RPO), rpo.co.za – weekly Absa carcass / weaner price table. Reproduced for private family use with attribution.",
    "status": "ok",
    "error": null,
-   "checked_at": "2026-11-23T14:19:26Z",
-   "last_success": "2026-11-23T14:19:26Z",
+   "checked_at": "2026-11-23T21:48:20Z",
+   "last_success": "2026-11-23T21:48:20Z",
    "latest": {
     "date": "2026-11-20",
     "week_ending": "2026-11-13",
@@ -1170,10 +1170,10 @@
    "reports_url": "https://amtrends.co.za/livestock-weekly-reports-amtrends/",
    "series": "Weaners 200-250 kg, R/kg live – weekly; classes and regional prices from the AMT Weekly Livestock Report",
    "attribution": "Source: AMT – amtrends.co.za market prices and AMT Weekly Livestock Report. Reproduced for private family use with attribution.",
-   "status": "partial",
-   "error": "classes/regions are from report dated 2026-11-13; headline is 2026-11-20",
-   "checked_at": "2026-11-23T14:19:26Z",
-   "last_success": "2026-11-23T14:19:26Z",
+   "status": "ok",
+   "error": null,
+   "checked_at": "2026-11-23T21:48:20Z",
+   "last_success": "2026-11-23T21:48:20Z",
    "latest": {
     "date": "2026-11-20",
     "week_ending": null,
@@ -1182,57 +1182,57 @@
     "change_pct": 0.8
    },
    "report": {
-    "no": 46,
-    "date": "2026-11-13",
-    "url": "https://amtrends.co.za/wp-content/uploads/2026/11/AMT-Weekly-Livestock-Report-No-46-2026.11.13.pdf"
+    "no": 47,
+    "date": "2026-11-20",
+    "url": "https://amtrends.co.za/wp-content/uploads/2026/11/AMT-Weekly-Livestock-Report-No-47-2026.11.20.pdf"
    },
    "classes": [
     {
      "id": "light",
      "label": "Light weaners (160-200 kg)",
-     "value": 46.35
+     "value": 46.96
     },
     {
      "id": "heavy",
      "label": "Heavy weaners (250-300 kg)",
-     "value": 44.6
+     "value": 44.48
     },
     {
      "id": "top40",
      "label": "Weaners top 40% (200-240 kg)",
-     "value": 48.27
+     "value": 48.4
     }
    ],
    "regions": [
     {
      "id": "FS",
      "label": "Free State (200-250 kg)",
-     "value": 46.85
+     "value": 47.65
     },
     {
      "id": "NW",
      "label": "North West (200-250 kg)",
-     "value": 46.74
+     "value": 46.35
     },
     {
      "id": "EC",
      "label": "Eastern Cape (200-250 kg)",
-     "value": 46.61
+     "value": 46.74
     },
     {
      "id": "MP",
      "label": "Mpumalanga (200-250 kg)",
-     "value": 43.72
+     "value": 42.28
     },
     {
      "id": "WC",
      "label": "Western Cape (200-250 kg)",
-     "value": 43.27
+     "value": 42.36
     },
     {
      "id": "KZN",
      "label": "KwaZulu-Natal (200-250 kg)",
-     "value": 41.03
+     "value": 46.26
     }
    ],
    "history": [
@@ -1310,7 +1310,21 @@
     },
     {
      "date": "2026-11-20",
-     "value": 46.49
+     "value": 46.49,
+     "classes": {
+      "light": 46.96,
+      "heavy": 44.48,
+      "top40": 48.4
+     },
+     "regions": {
+      "FS": 47.65,
+      "NW": 46.35,
+      "EC": 46.74,
+      "MP": 42.28,
+      "WC": 42.36,
+      "KZN": 46.26
+     },
+     "report_no": 47
     }
    ]
   },
